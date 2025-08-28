@@ -12,8 +12,8 @@ para que registrem suas transações financeiras, as categorizem, e visualizem u
      EXEMPLO:
      Usuários principais: Alunos da turma de Desenvolvimento Web
      Decisores/Apoiadores: Professores da disciplina; Coordenação do curso -->
--Usuários principais: Usuários.
--Decisores/Apoiadores: Desenvolvedor. 
+-Usuários principais: Usuários. 
+-Decisores/Apoiadores: Cliente. 
 
 ## 3) Casos de uso (de forma simples)
 <!-- Formato "Ator: ações que pode fazer".
@@ -33,9 +33,9 @@ para que registrem suas transações financeiras, as categorizem, e visualizem u
      Limites: entrega final até o fim da disciplina (ex.: 2025-11-30); rodar no navegador; sem serviços pagos.
      Suposições: internet no laboratório; navegador atualizado; acesso ao GitHub; 10 min para teste rápido.
      Plano B: sem internet → rodar local e salvar em arquivo/LocalStorage; sem tempo do professor → testar com 3 colegas. -->
--Limites: prazo final de entrega previsto pela disciplina, autenticação de usuário,  proteção CSRF, cookies seguros e validação server-side, sem serviços pagos, uso de tecnologias web, com um backend e um banco de dados, rodar em navegador atualizado.
--Suposições: O usuário possui conexão com a internet  
--Plano B: A aplicação deve ser capaz de rodar inteiramente em um ambiente local (localhost).
+- Limites: prazo final de entrega previsto pela disciplina, autenticação de usuário,  proteção CSRF, cookies seguros e validação server-side, sem serviços pagos, uso de tecnologias web, com um backend e um banco de dados, rodar em navegador atualizado.
+- Suposições: O usuário possui conexão com a internet  
+- Plano B: A aplicação deve ser capaz de rodar inteiramente em um ambiente local (localhost).
 
 ## 5) Hipóteses + validação
 <!-- Preencha as duas frases abaixo. Simples e direto.
@@ -44,11 +44,11 @@ para que registrem suas transações financeiras, as categorizem, e visualizem u
      EXEMPLO Viabilidade: Com app no navegador (HTML/CSS/JS + armazenamento local),
      criar e listar chamados responde em até 1 segundo na maioria das vezes (ex.: 9 de cada 10).
      Validação: medir no protótipo com 30 ações; meta: pelo menos 27 de 30 ações (9/10) em 1s ou menos. -->
--H-Valor: Se um usuário registrar consistentemente suas transações de ganhos e gastos, então sua compreensão sobre seu estado financeiro melhora em clareza, facilitando o gerenciamente financeiro.  
--Validação (valor): O usuário de teste (avaliador) deve conseguir realizar o fluxo completo de: a. Logar, b. Adicionar uma nova transação de receita e uma de despesa, c. Visualizar o dashboard e identificar corretamente o saldo resultante, d. Editar uma transação.
--H-Viabilidade: Com a arquitetura SSR (Server-Side Rendering) utilizando Node.js/Express + EJS + SQLite.  
--Validação (viabilidade): Medição manual do tempo de carregamento completo da página (Ferramenta "Network" do DevTools, métrica "Load" ou "Finish") 
--meta: 9 em cada 10 carregamentos de página (90%) são completados em 1 segundo ou menos.
+- H-Valor: Se um usuário registrar consistentemente suas transações de ganhos e gastos, então sua compreensão sobre seu estado financeiro melhora em clareza, facilitando o gerenciamente financeiro.  
+- Validação (valor): O usuário de teste (avaliador) deve conseguir realizar o fluxo completo de: a. Logar, b. Adicionar uma nova transação de receita e uma de despesa, c. Visualizar o dashboard e identificar corretamente o saldo resultante, d. Editar uma transação.
+-H-Viabilidade: Com a arquitetura SSR (Server-Side Rendering) utilizando Node.js/Express + EJS + mysql.  
+- Validação (viabilidade): Medição manual do tempo de carregamento completo da página (Ferramenta "Network" do DevTools, métrica "Load" ou "Finish") 
+- meta: 9 em cada 10 carregamentos de página (90%) são completados em 1 segundo ou menos.
 
 ## 6) Fluxo principal e primeira fatia
 <!-- Pense “Entrada → Processo → Saída”.
@@ -62,13 +62,20 @@ para que registrem suas transações financeiras, as categorizem, e visualizem u
      Inclui login simples, criar chamado, listar em ordem.
      Critérios de aceite (objetivos): criar → aparece na lista com horário; encerrar → some ou marca "fechado". -->
 **Fluxo principal (curto):**  
-1) [entrada do usuário] → 2) [processo] → 3) [salvar algo] → 4) [mostrar resultado]
+1) Usuário autenticado visualiza sua lista de transações. 
+2) Clica em "Adicionar Transação" e preenche o formulário.  
+3) Sistema valida e salva os dados.  
+4) A página é atualizada, mostrando a nova transação na lista e o saldo do dashboard é recalculado.
 
 **Primeira fatia vertical (escopo mínimo):**  
-Inclui: [uma tela], [uma ação principal], [salvar], [mostrar algo]  
-Critérios de aceite:
-- [Condição 1 bem objetiva]
-- [Condição 2 bem objetiva]
+- Inclui: Autenticação básica (registro + login), tela de listagem de transações (vazia inicialmente), funcionalidade de criar uma transação, cálculo e exibição do saldo simples (Income - Expenses).  
+- Critérios de aceite:
+<!-- Ao criar uma transação do tipo 'income', ela deve aparecer imediatamente na lista de   transações e o valor do "Total Income" no dashboard deve aumentar correspondentemente.
+
+Ao criar uma transação do tipo 'expense', ela deve aparecer imediatamente na lista de transações e o valor do "Total Expenses" no dashboard deve aumentar, resultando em uma diminuição do "Net Balance".
+-->
+1) Ao criar uma transação do tipo 'income', ela deve aparecer imediatamente na lista de   transações e o valor do "Total Income" no dashboard deve aumentar correspondentemente.
+2) Ao criar uma transação do tipo 'expense', ela deve aparecer imediatamente na lista de transações e o valor do "Total Expenses" no dashboard deve aumentar, resultando em uma diminuição do "Net Balance".
 
 ## 7) Esboços de algumas telas (wireframes)
 <!-- Vale desenho no papel (foto), Figma, Excalidraw, etc. Não precisa ser bonito, precisa ser claro.
@@ -83,20 +90,21 @@ Critérios de aceite:
 
 ## 8) Tecnologias
 <!-- Liste apenas o que você REALMENTE pretende usar agora. -->
+JavaScript
 
 ### 8.1 Navegador
-**Navegador:** [HTML/CSS/JS | React/Vue/Bootstrap/etc., se houver]  
+**Navegador:** HTML/CSS/JS Bootstrap, se houver
 **Armazenamento local (se usar):** [LocalStorage/IndexedDB/—]  
 **Hospedagem:** [GitHub Pages/—]
 
 ### 8.2 Front-end (servidor de aplicação, se existir)
-**Front-end (servidor):** [ex.: Next.js/React/—]  
+**Front-end (servidor):** Node.js + Express (SSR) 
 **Hospedagem:** [ex.: Vercel/—]
 
 ### 8.3 Back-end (API/servidor, se existir)
-**Back-end (API):** [ex.: FastAPI/Express/PHP/Laravel/Spring/—]  
-**Banco de dados:** [ex.: SQLite/Postgres/MySQL/MongoDB/—]  
-**Deploy do back-end:** [ex.: Render/Railway/—]
+**Back-end (API):** Node.js + Express (SSR)  
+**Banco de dados:** MySQL.  
+**Deploy do back-end:** Render ou Railway
 
 ## 9) Plano de Dados (Dia 0) — somente itens 1–3
 <!-- Defina só o essencial para criar o banco depois. -->
