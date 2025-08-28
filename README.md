@@ -1,23 +1,19 @@
-# [Título do seu projeto]
+# [FinTrack - Gerenciador de orçamento]
 <!-- EXEMPLO: "AtendeAí — Fila de Ajuda em Sala" -->
 
 ## 1) Problema
-<!-- Escreva o problema sem falar de telas/tecnologias.
-     Responda: Quem sofre? Onde? O que atrapalha? Por que isso importa?
-     EXEMPLO: Em aulas práticas, alunos esperam muito para serem atendidos.
-     Há filas confusas e frustração. O professor não vê ordem nem tempo de espera.
-     Objetivo inicial: organizar a fila para reduzir a espera e garantir justiça. -->
-[Quem], em [contexto], tem dificuldade em [tarefa/dor].
-Isso causa [efeito mensurável].
-No início, o foco será [público principal] com o objetivo de [resultado simples].
+<!--  A gestão das finanças pessoais pode ser estressante. Muitas pessoas perdem o controle de seus gastos e têm dificuldade em lembrar para onde foi seu dinheiro. Para isso criarei um sistema que registra gastos e rendas de cada usuário, em uma interface simples e privada, 
+para que registrem suas transações financeiras, as categorizem, e visualizem um resumo de suas despesas e receitas. -->
+-A gestão das finanças pessoais pode ser estressante. Muitas pessoas perdem o controle de seus gastos e têm dificuldade em lembrar para onde foi seu dinheiro. Para isso criarei um sistema que registra gastos e rendas de cada usuário, em uma interface simples e privada, 
+para que registrem suas transações financeiras, as categorizem, e visualizem um resumo de suas despesas e receitas.
 
 ## 2) Atores e Decisores (quem usa / quem decide)
 <!-- Liste papéis (não nomes).
      EXEMPLO:
      Usuários principais: Alunos da turma de Desenvolvimento Web
      Decisores/Apoiadores: Professores da disciplina; Coordenação do curso -->
-Usuários principais: [lista]
-Decisores/Apoiadores: [lista]
+-Usuários principais: Usuários.
+-Decisores/Apoiadores: Desenvolvedor. 
 
 ## 3) Casos de uso (de forma simples)
 <!-- Formato "Ator: ações que pode fazer".
@@ -26,9 +22,7 @@ Decisores/Apoiadores: [lista]
      Todos: Logar/deslogar do sistema; Manter dados cadastrais
      Professor: Manter (inserir, mostrar, editar, remover) todos os chamados
      Aluno: Manter (inserir, mostrar, editar, remover) seus chamados -->
-Todos: [ações comuns, ex.: Logar/deslogar; Manter dados cadastrais]  
-[Ator 1]: [ações do ator 1]  
-[Ator 2]: [ações do ator 2]
+-Todos: Registrar uma conta no sistema, fazer login no sistema Usuário individual: Fazer logout do sistema, manter (visualizar, editar, excluir) os próprios dados cadastrais, manter (inserir, visualizar, editar, remover) suas transações financeiras, Visualizar um dashboard com o resumo financeiro (Total de Receitas, Total de Despesas, Saldo Líquido), filtrar e visualizar transações por categoria ou período.  
 
 ## 4) Limites e suposições
 <!-- Simples assim:
@@ -39,9 +33,9 @@ Todos: [ações comuns, ex.: Logar/deslogar; Manter dados cadastrais]
      Limites: entrega final até o fim da disciplina (ex.: 2025-11-30); rodar no navegador; sem serviços pagos.
      Suposições: internet no laboratório; navegador atualizado; acesso ao GitHub; 10 min para teste rápido.
      Plano B: sem internet → rodar local e salvar em arquivo/LocalStorage; sem tempo do professor → testar com 3 colegas. -->
-Limites: [prazo final], [regras/tecnologias obrigatórias], [restrições]  
-Suposições: [internet/navegador/GitHub/tempo de teste]  
-Plano B: [como continua entregando a 1ª fatia se algo falhar]
+-Limites: prazo final de entrega previsto pela disciplina, autenticação de usuário,  proteção CSRF, cookies seguros e validação server-side, sem serviços pagos, uso de tecnologias web, com um backend e um banco de dados, rodar em navegador atualizado.
+-Suposições: O usuário possui conexão com a internet  
+-Plano B: A aplicação deve ser capaz de rodar inteiramente em um ambiente local (localhost).
 
 ## 5) Hipóteses + validação
 <!-- Preencha as duas frases abaixo. Simples e direto.
@@ -50,11 +44,11 @@ Plano B: [como continua entregando a 1ª fatia se algo falhar]
      EXEMPLO Viabilidade: Com app no navegador (HTML/CSS/JS + armazenamento local),
      criar e listar chamados responde em até 1 segundo na maioria das vezes (ex.: 9 de cada 10).
      Validação: medir no protótipo com 30 ações; meta: pelo menos 27 de 30 ações (9/10) em 1s ou menos. -->
-H-Valor: Se [X], então [Y] melhora em [critério].  
-Validação (valor): [teste rápido/observação]; alvo: [meta simples].
-
-H-Viabilidade: Com [tecnologia], [ação/tela] leva até [n] s.  
-Validação (viabilidade): [medição no protótipo]; meta: [n] s ou menos na maioria das vezes (ex.: 9/10).
+-H-Valor: Se um usuário registrar consistentemente suas transações de ganhos e gastos, então sua compreensão sobre seu estado financeiro melhora em clareza, facilitando o gerenciamente financeiro.  
+-Validação (valor): O usuário de teste (avaliador) deve conseguir realizar o fluxo completo de: a. Logar, b. Adicionar uma nova transação de receita e uma de despesa, c. Visualizar o dashboard e identificar corretamente o saldo resultante, d. Editar uma transação.
+-H-Viabilidade: Com a arquitetura SSR (Server-Side Rendering) utilizando Node.js/Express + EJS + SQLite.  
+-Validação (viabilidade): Medição manual do tempo de carregamento completo da página (Ferramenta "Network" do DevTools, métrica "Load" ou "Finish") 
+-meta: 9 em cada 10 carregamentos de página (90%) são completados em 1 segundo ou menos.
 
 ## 6) Fluxo principal e primeira fatia
 <!-- Pense “Entrada → Processo → Saída”.
