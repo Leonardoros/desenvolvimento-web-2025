@@ -1,0 +1,19 @@
+{
+  "name": "desenvolvimento-web-2025",
+  "version": "1.0.0",
+  "description": "<!-- EXEMPLO: \"AtendeAí — Fila de Ajuda em Sala\" -->",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leonardoros/desenvolvimento-web-2025.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leonardoros/desenvolvimento-web-2025/issues"
+  },
+  "homepage": "https://github.com/Leonardoros/desenvolvimento-web-2025#readme"
+}

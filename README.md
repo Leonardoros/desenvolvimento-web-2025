@@ -44,7 +44,7 @@ para que registrem suas transações financeiras, as categorizem, e visualizem u
      EXEMPLO Viabilidade: Com app no navegador (HTML/CSS/JS + armazenamento local),
      criar e listar chamados responde em até 1 segundo na maioria das vezes (ex.: 9 de cada 10).
      Validação: medir no protótipo com 30 ações; meta: pelo menos 27 de 30 ações (9/10) em 1s ou menos. -->
-- H-Valor: Se um usuário registrar consistentemente suas transações de ganhos e gastos, então sua compreensão sobre seu estado financeiro melhora em clareza, facilitando o gerenciamente financeiro.  
+- H-Valor: Se um usuário registrar consistentemente suas transações de ganhos e gastos, então sua compreensão sobre seu estado financeiro melhora em clareza, facilitando o gerenciamento financeiro.  
 - Validação (valor): O usuário de teste (avaliador) deve conseguir realizar o fluxo completo de: a. Logar, b. Adicionar uma nova transação de receita e uma de despesa, c. Visualizar o dashboard e identificar corretamente o saldo resultante, d. Editar uma transação.
 -H-Viabilidade: Com a arquitetura SSR (Server-Side Rendering) utilizando Node.js/Express + EJS + mysql.  
 - Validação (viabilidade): Medição manual do tempo de carregamento completo da página (Ferramenta "Network" do DevTools, métrica "Load" ou "Finish") 
@@ -90,16 +90,19 @@ Ao criar uma transação do tipo 'expense', ela deve aparecer imediatamente na l
 
 ## 8) Tecnologias
 <!-- Liste apenas o que você REALMENTE pretende usar agora. -->
-JavaScript
+- HTML + CSS (com Bootstrap opcional)
+- JavaScript no cliente (scripts leves de interação)
+- Node.js + Express + EJS (SSR) no servidor
+- MySQL (banco de dados)
 
 ### 8.1 Navegador
 **Navegador:** HTML/CSS/JS Bootstrap, se houver
-**Armazenamento local (se usar):** [LocalStorage/IndexedDB/—]  
-**Hospedagem:** [GitHub Pages/—]
+**Armazenamento local (se usar):** LocalStorage/IndexedDB/— 
+**Hospedagem:** Railway possivelmente
 
 ### 8.2 Front-end (servidor de aplicação, se existir)
 **Front-end (servidor):** Node.js + Express (SSR) 
-**Hospedagem:** [ex.: Vercel/—]
+**Hospedagem:** Railway (suporte a Node.js e banco de dados MySQL, integração com GitHub)
 
 ### 8.3 Back-end (API/servidor, se existir)
 **Back-end (API):** Node.js + Express (SSR)  
