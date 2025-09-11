@@ -1,7 +1,8 @@
-import express from "express";
+import express from 'express';
+import sequelize from './db.js'; // incluir a extensão .js
 
 const app = express();
-app.use(express.json());
+app.use(express.json()); // Middleware para entender JSON
 
 // rota de saúde
 app.get("/health", (req, res) => res.json({ ok: true }));

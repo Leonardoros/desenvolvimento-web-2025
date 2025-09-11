@@ -1,7 +1,7 @@
 {
   "name": "desenvolvimento-web-2025",
   "version": "1.0.0",
-  "type":"module",
+  "type": "module",
   "description": "<!-- EXEMPLO: \"AtendeAí — Fila de Ajuda em Sala\" -->",
   "main": "index.js",
   "scripts": {
@@ -20,10 +20,12 @@
   "homepage": "https://github.com/Leonardoros/desenvolvimento-web-2025#readme",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.2",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "mysql2": "^3.14.5",
+    "pg": "^8.16.3",
     "sequelize": "^6.37.7"
   },
   "devDependencies": {
