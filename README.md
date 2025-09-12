@@ -184,7 +184,7 @@ CREATE TABLE transactions (
 
 
 
-INSERT INTO users (nome, email, password_hash) VALUES
+INSERT INTO users (username, email, password_hash) VALUES
 ('Usuário', 'user@user.com.br', '123');
 
 INSERT INTO transactions (user_id, amount, description, type, category, date)  VALUES
