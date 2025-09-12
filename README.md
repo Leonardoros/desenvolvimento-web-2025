@@ -115,9 +115,12 @@ Ao criar uma transação do tipo 'expense', ela deve aparecer imediatamente na l
 ### 9.1 Entidades
 <!-- EXEMPLO:
      - Usuario — pessoa que usa o sistema (aluno/professor)
-     - Chamado — pedido de ajuda criado por um usuário -->
-- [Entidade 1] — [o que representa em 1 linha]
-- [Entidade 2] — [...]
+     - Chamado — pedido de ajuda criado por um usuário 
+     Duas tabelas principais: Usiário e Transações
+     (adicionarei depois outra entidade "categorias")
+-->
+- Users — Armazena as informações dos usuários do sistema.
+- Transactions — Registra todas as operações financeiras (receitas e despesas) dos usuários.
 - [Entidade 3] — [...]
 
 ### 9.2 Campos por entidade
@@ -127,26 +130,64 @@ Ao criar uma transação do tipo 'expense', ela deve aparecer imediatamente na l
 | Campo           | Tipo                          | Obrigatório | Exemplo            |
 |-----------------|-------------------------------|-------------|--------------------|
 | id              | número                        | sim         | 1                  |
-| nome            | texto                         | sim         | "Ana Souza"        |
+| username            | texto                         | sim         | "Ana Souza"        |
 | email           | texto                         | sim (único) | "ana@exemplo.com"  |
-| senha_hash      | texto                         | sim         | "$2a$10$..."       |
-| papel           | número (0=aluno, 1=professor) | sim         | 0                  |
-| dataCriacao     | data/hora                     | sim         | 2025-08-20 14:30   |
-| dataAtualizacao | data/hora                     | sim         | 2025-08-20 15:10   |
+| password_hash      | texto                         | sim         | "$2a$10$..."       |
+| created_at           | data/hora                  | sim         | 2025-08-20 12:30     |
+| updated_at     | data/hora                     | sim         | 2025-08-20 14:30   |
 
-### Chamado
+### Transações
 | Campo           | Tipo               | Obrigatório | Exemplo                 |
 |-----------------|--------------------|-------------|-------------------------|
-| id              | número             | sim         | 2                       |
-| Usuario_id      | número (fk)        | sim         | 8f3a-...                |
-| texto           | texto              | sim         | "Erro ao compilar"      |
-| estado          | char               | sim         | 'a' \| 'f'              |
-| dataCriacao     | data/hora          | sim         | 2025-08-20 14:35        |
-| dataAtualizacao | data/hora          | sim         | 2025-08-20 14:50        |
+| id              | número             | sim         | 2                       |  
+| user_id         | número (fk)        | sim         | 8f3a-...                |
+| amount          | decimal            | sim         | 150.50                  |
+| description     | texto              | não         | "Supermercado"          |
+| type            | texto (enum)       | sim         | "expense"               |   
+| category        | texto              | sim         | food                    |
+| date            | data               | sim         | 2025-08-20              |
+| created_at      | data/hora          | sim         | 2025-08-20 14:35        |
+| updated_at      | data/hora          | sim         | 2025-08-20 14:50        |
 
 ### 9.3 Relações entre entidades
 <!-- Frases simples bastam. EXEMPLO:
      Um Usuario tem muitos Chamados (1→N).
      Um Chamado pertence a um Usuario (N→1). -->
-- Um [A] tem muitos [B]. (1→N)
-- Um [B] pertence a um [A]. (N→1)
+- Um User tem muitas Transactions. (1→N)
+- Uma Transaction pertence a um User. (N→1)
+
+### 9.4 Modelagem do banco de dados no MYSQL
+
+```sql
+CREATE TABLE users (
+  id               INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username         VARCHAR(255) NOT NULL UNIQUE,
+  email            VARCHAR(255) NOT NULL UNIQUE,
+  password_hash    VARCHAR(255) NOT NULL,
+  created_at       TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+  updated_at       TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE transactions (
+  id               INT            NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id          INT            NOT NULL,
+  amount           DECIMAL(10, 2) NOT NULL,
+  description      TEXT,
+  type             ENUM('income', 'expense') NOT NULL,
+  category         VARCHAR(255),
+  date             DATE           NOT NULL,
+  created_at       TIMESTAMP      DEFAULT CURRENT_TIMESTAMP,
+  updated_at       TIMESTAMP      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+
+
+
+INSERT INTO users (nome, email, password_hash) VALUES
+('Usuário', 'user@user.com.br', '123');
+
+INSERT INTO transactions (user_id, amount, description, type, category, date)  VALUES
+(1, 2500.00, 'Salário mensal', 'income', 'Salário', '2025-08-25'),
+(1, 150.50, 'Supermercado semanal', 'expense', 'Alimentação', '2025-08-26'),
+```
