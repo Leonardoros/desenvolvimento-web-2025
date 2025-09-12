@@ -189,5 +189,5 @@ INSERT INTO users (username, email, password_hash) VALUES
 
 INSERT INTO transactions (user_id, amount, description, type, category, date)  VALUES
 (1, 2500.00, 'Salário mensal', 'income', 'Salário', '2025-08-25'),
-(1, 150.50, 'Supermercado semanal', 'expense', 'Alimentação', '2025-08-26'),
+(1, 150.50, 'Supermercado semanal', 'expense', 'Alimentação', '2025-08-26');
 ```
