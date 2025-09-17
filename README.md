@@ -182,8 +182,6 @@ CREATE TABLE transactions (
 );
 
 
-
-
 INSERT INTO users (username, email, password_hash) VALUES
 ('Usuário', 'user@user.com.br', '123');
 
