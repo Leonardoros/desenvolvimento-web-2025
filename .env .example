@@ -1,0 +1,13 @@
+# .env
+PORT=3000
+
+# Conexão MySQL
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=finTrack_db
+DB_USER=root
+DB_PASS= #em branco por enquanto
+
+# Sessão e Segurança
+SESSION_SECRET=um_secreto_muito_longo_e_aleatorio_aqui
+NODE_ENV=development
