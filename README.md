@@ -69,6 +69,7 @@ para que registrem suas transações financeiras, as categorizem, e visualizem u
 
 **Primeira fatia vertical (escopo mínimo):**  
 - Inclui: Autenticação básica (registro + login), tela de listagem de transações (vazia inicialmente), funcionalidade de criar uma transação, cálculo e exibição do saldo simples (Income - Expenses).  
+
 - Critérios de aceite:
 <!-- Ao criar uma transação do tipo 'income', ela deve aparecer imediatamente na lista de   transações e o valor do "Total Income" no dashboard deve aumentar correspondentemente.
 
@@ -92,7 +93,7 @@ Ao criar uma transação do tipo 'expense', ela deve aparecer imediatamente na l
 <!-- Liste apenas o que você REALMENTE pretende usar agora. -->
 - HTML + CSS (com Bootstrap opcional)
 - JavaScript no cliente (scripts leves de interação)
-- Node.js + Express + EJS (SSR) no servidor
+- Node.js + Express + API JSON no servidor
 - MySQL (banco de dados)
 
 ### 8.1 Navegador
@@ -101,11 +102,11 @@ Ao criar uma transação do tipo 'expense', ela deve aparecer imediatamente na l
 **Hospedagem:** Railway possivelmente
 
 ### 8.2 Front-end (servidor de aplicação, se existir)
-**Front-end (servidor):** Node.js + Express (SSR) 
+**Front-end (servidor):** Node.js + application/json 
 **Hospedagem:** Railway (suporte a Node.js e banco de dados MySQL, integração com GitHub)
 
 ### 8.3 Back-end (API/servidor, se existir)
-**Back-end (API):** Node.js + Express (SSR)  
+**Back-end (API):** Node.js + application/json  
 **Banco de dados:** MySQL.  
 **Deploy do back-end:** Render ou Railway
 
@@ -181,6 +182,32 @@ CREATE TABLE transactions (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE categories (
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    type ENUM('income', 'expense') NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO categories (name, type) VALUES
+-- Categorias de expense (despesas)
+('Alimentação', 'expense'),
+('Transporte', 'expense'),
+('Moradia', 'expense'),
+('Saúde', 'expense'),
+('Educação', 'expense'),
+('Lazer', 'expense'),
+('Vestuário', 'expense'),
+('Outras Despesas', 'expense'),  -- Nome diferente
+
+-- Categorias de income (receitas)
+('Salário', 'income'),
+('Freelance', 'income'),
+('Investimentos', 'income'),
+('Presente', 'income'),
+('Reembolso', 'income'),
+('Outras Receitas', 'income');   -- Nome diferente
 
 INSERT INTO users (username, email, password_hash) VALUES
 ('Usuário', 'user@user.com.br', '123');
