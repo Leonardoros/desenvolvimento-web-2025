@@ -11,7 +11,6 @@ const Category = sequelize.define('Category', {
         type: DataTypes.ENUM('income', 'expense'),
         allowNull: false
     },
-    // Adicione estas linhas para mapear corretamente
     created_at: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -24,7 +23,7 @@ const Category = sequelize.define('Category', {
     }
 }, {
     tableName: 'categories',
-    timestamps: true, // Mantém true
+    timestamps: true, 
     createdAt: 'created_at', // Mapeia createdAt para created_at
     updatedAt: 'updated_at'  // Mapeia updatedAt para updated_at
 });

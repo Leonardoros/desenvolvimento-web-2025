@@ -19,7 +19,7 @@ app.use(express.json());
 
 const transactionsLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 20, // Apenas 20 requests por IP - BAIXO para finanças
+  max: 20, // Apenas 20 requests por IP 
   message: { error: 'Limite de requisições excedido. Tente novamente em 15 minutos.' }
 });
 
@@ -67,7 +67,7 @@ app.get("/", async (_req, res) => {
     }
 });
 
-// Conecte os roteadores ao aplicativo Express
+// Conecta os roteadores ao aplicativo Express
 app.use("/api/users", usersRouter); // 👈 Adicione /api/
 app.use("/api/transactions", transactionsRouter); // 👈 Adicione /api/
 app.use('/api/categories', categoriesRouter);
