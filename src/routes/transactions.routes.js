@@ -10,7 +10,7 @@ const router = Router();
 router.get("/", async (_req, res) => {
     try {
         const transactions = await Transaction.findAll({
-            include: [Category], // 👈 Inclui os dados da categoria
+            include: [Category], // Inclui os dados da categoria
             order: [['createdAt', 'DESC']]
         });
         res.json(transactions);
